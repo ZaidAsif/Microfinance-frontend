@@ -40,7 +40,7 @@ export default function useApplications() {
     month.date(i + 1)
   );
 
-  const eventsByDate: { [date: string]: any[] } = {};
+  const eventsByDate: { [date: string]: Appointment[] } = {};
   applications.forEach((app: Appointment) => {
     const date = dayjs(app.createdAt).format("YYYY-MM-DD");
     if (!eventsByDate[date]) eventsByDate[date] = [];
