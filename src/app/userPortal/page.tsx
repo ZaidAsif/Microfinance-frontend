@@ -30,7 +30,7 @@ export default function UserDashboard() {
     fetchLoanRequests();
   }, []);
 
-  const getStatusStyle = (status: string) => {
+  const getStatusStyle = (status: string | undefined) => {
     switch (status) {
       case "Pending":
         return {
@@ -118,7 +118,7 @@ export default function UserDashboard() {
               className="bg-white rounded-lg shadow p-4 flex flex-col"
             >
               <img
-                src={`/${loan.category.toLowerCase()}.png`}
+                src={`/${loan.category?.toLowerCase()}.png`}
                 alt={loan.category}
                 className="rounded-lg w-full h-32 object-cover mb-4"
               />
