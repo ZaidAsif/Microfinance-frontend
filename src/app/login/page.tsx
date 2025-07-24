@@ -20,7 +20,7 @@ export default function Login() {
       const user = useAuthStore.getState().user;
       router.push(user?.isAdmin ? "/adminPanel" : "/userPortal");
     }
-  }, []);
+  }, [router]);
 
   const handleLogin = async () => {
     setError("");
@@ -32,13 +32,9 @@ export default function Login() {
       localStorage.setItem('token', JSON.stringify(data.data.token));
       localStorage.setItem('user', JSON.stringify(data.data.user));
       router.push(data.data.user.isAdmin ? "/adminPanel" : "/userPortal");
-    } catch (error: any) {
-      const msg =
-        error?.response?.data?.msg ||
-        error?.response?.data?.message ||
-        error?.message ||
-        "Login failed. Please try again.";
-      setError(msg);
+    } catch (error) {
+console.error("Login error:", error);
+      setError('Invalid email or password. Please try again.');
     } finally {
       setLoading(false);
     }

@@ -6,6 +6,7 @@ import { BASIC_URL } from "@/constant/constant";
 import useAuthStore from "@/store/authstore";
 import { useRouter } from "next/navigation";
 import { FaClock, FaTimesCircle, FaCheckCircle } from "react-icons/fa";
+import { LoanDetails } from "@/types/loanDetails";
 
 export default function UserDashboard() {
   const [loanRequests, setLoanRequests] = useState([]);
@@ -109,7 +110,7 @@ export default function UserDashboard() {
 
     {loanRequests.length > 0 ? (
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {loanRequests.map((loan: any) => {
+        {loanRequests.map((loan: LoanDetails) => {
           const status = getStatusStyle(loan.status);
           return (
             <div

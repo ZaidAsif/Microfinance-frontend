@@ -9,12 +9,13 @@ import {
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { BASIC_URL } from "@/constant/constant";
+import { Application } from "@/types/application";
 
 export default function AdminPanel() {
   const router = useRouter();
   const [filterCity, setFilterCity] = useState("");
-  const [selectedApp, setSelectedApp] = useState<any>(null);
-  const [applications, setApplications] = useState<any[]>([]);
+  const [selectedApp, setSelectedApp] = useState<Application | null>(null);
+  const [applications, setApplications] = useState<Application[]>([]);
   const [loading, setLoading] = useState(false);
 
   const fetchApplications = async (city = "") => {
@@ -35,6 +36,7 @@ export default function AdminPanel() {
       setApplications(data.data || []);
     } catch (error) {
       setApplications([]);
+      console.log(error);
     } finally {
       setLoading(false);
     }

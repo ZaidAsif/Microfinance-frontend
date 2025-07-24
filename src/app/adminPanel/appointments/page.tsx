@@ -11,13 +11,14 @@ import useApplications from "@/components/appointmentsData";
 import { useState } from "react";
 import AppDetailModal from "@/components/appDetailModal";
 import { Application } from "@/types/application";
+import { Appointment } from "@/types/appointment";
 
 export default function ApplicationsPage() {
   const router = useRouter();
-  const [selectedApp, setSelectedApp] = useState(null);
+  const [selectedApp, setSelectedApp] = useState<Appointment | null>(null);
   const [showModal, setShowModal] = useState(false);
 
-  const handleAppClick = (app: any) => {
+  const handleAppClick = (app: Appointment) => {
     setSelectedApp(app);
     setShowModal(true);
   };
@@ -28,7 +29,6 @@ export default function ApplicationsPage() {
   };
 
   const {
-    applications,
     loading,
     error,
     eventsByDate,

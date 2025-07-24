@@ -5,10 +5,11 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import { FaUsers, FaClipboardList, FaCalendarAlt } from "react-icons/fa";
 import { BASIC_URL } from "@/constant/constant";
+import { User } from "@/types/user";
 
 export default function Users() {
   const router = useRouter();
-  const [users, setUsers] = useState<any[]>([]);
+  const [users, setUsers] = useState<User[]>([]);
   const [createModalOpen, setCreateModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [newUserData, setNewUserData] = useState({
@@ -20,7 +21,7 @@ export default function Users() {
   });
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
-  const [selectedUser, setSelectedUser] = useState<any>(null);
+  const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [updatedUserData, setUpdatedUserData] = useState({
     name: "",
     email: "",
@@ -51,7 +52,7 @@ export default function Users() {
   const handleCreateUser = async () => {
     setIsLoading(true);
     try {
-      const response = await axios.post(
+      await axios.post(
         `${BASIC_URL}admin/users/create`,
         newUserData,
         {
@@ -60,6 +61,7 @@ export default function Users() {
           },
         }
       );
+
       setCreateModalOpen(false);
       fetchUsers();
       setNewUserData({
@@ -193,7 +195,7 @@ export default function Users() {
           <table className="min-w-full bg-white rounded-xl shadow-sm border border-gray-100 text-sm">
             <thead className="bg-green-100 text-green-800 font-semibold sticky top-0 z-10">
               <tr>
-                {["Name", "Email", "CNIC", "Status", "Actions"].map(
+                {["Name", "Email", "CNIC", "Actions"].map(
                   (header, index) => (
                     <th
                       key={index}
@@ -211,17 +213,7 @@ export default function Users() {
                   <td className="px-3 py-2">{user.name}</td>
                   <td className="px-3 py-2">{user.email}</td>
                   <td className="px-3 py-2">{user.cnic}</td>
-                  <td className="px-3 py-2">
-                    <span
-                      className={`px-3 py-1 rounded-full text-xs font-semibold inline-block ${
-                        user.status === "Active"
-                          ? "bg-green-100 text-green-700"
-                          : "bg-red-100 text-red-700"
-                      }`}
-                    >
-                      {user.status}
-                    </span>
-                  </td>
+
                   <td className="px-3 py-2">
                     <button
                       onClick={() => {

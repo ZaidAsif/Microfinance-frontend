@@ -36,7 +36,7 @@ export default function ChangePassword() {
         setFormSuccess(null);
         try {
             const token = JSON.parse(localStorage.getItem("token") || '""');
-            const {data} = await axios.post(
+            await axios.post(
                 `${BASIC_URL}auth/changePassword`,
                 { oldPassword, newPassword },
                 {
@@ -49,8 +49,9 @@ export default function ChangePassword() {
             setOldPassword("");
             setNewPassword("");
             setConfirmPassword("");
-        } catch (error: any) {
-            setFormError(error?.response?.data?.message || "Failed to change password");
+        } catch (error) {
+            setFormError("Failed to change password");
+            console.error("error changing password:", error);
         } finally {
             setLoading(false);
         }

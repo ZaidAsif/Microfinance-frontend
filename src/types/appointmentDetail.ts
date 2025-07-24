@@ -4,4 +4,5 @@ export type AppointmentDetails = {
   loanId: string;
   date: string;
   time: string;
+  token: string;
 }

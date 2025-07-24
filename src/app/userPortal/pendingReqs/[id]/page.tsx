@@ -1,14 +1,15 @@
 "use client";
 
 import { BASIC_URL } from "@/constant/constant";
+import type { LoanDetails } from "@/types/loanDetails";
 import axios from "axios";
 import { useRouter, useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
-export default function LoanDetails({ params }: { params: { id: string } }) {
+export default function LoanDetails() {
   const { id }: { id: string } = useParams();
   const router = useRouter();
-  const [loanDetails, setLoanDetails] = useState<any>(null);
+  const [loanDetails, setLoanDetails] = useState<LoanDetails | null>(null);
 
   const [guarantor1Name, setGuarantor1Name] = useState("");
   const [guarantor1Email, setGuarantor1Email] = useState("");
@@ -71,7 +72,7 @@ export default function LoanDetails({ params }: { params: { id: string } }) {
   ) => {
     setPdfLoading(true);
     try {
-      const { data } = await axios.post(
+      await axios.post(
         `${BASIC_URL}slip/generate`,
         {
           userId,
@@ -86,12 +87,11 @@ export default function LoanDetails({ params }: { params: { id: string } }) {
       setFormSuccess(
         "Appointment slip generated! You can check your email inbox."
       );
-    } catch (error: any) {
+    } catch (error) {
       setFormError(
-        error?.response?.data?.message ||
-          error?.response?.data?.msg ||
           "Failed to generate slip."
       );
+      console.error(error);
     } finally {
       setPdfLoading(false);
     }
@@ -132,10 +132,9 @@ export default function LoanDetails({ params }: { params: { id: string } }) {
 
       await generatePdfSlip(user._id, id, token);
       
-    } catch (error: any) {
+    } catch (error) {
+      console.error("Error submitting details:", error);
       setFormError(
-        error?.response?.data?.message ||
-          error?.response?.data?.msg ||
           "Failed to submit details."
       );
     } finally {
@@ -242,7 +241,7 @@ export default function LoanDetails({ params }: { params: { id: string } }) {
           autoComplete="off"
         >
           <h2 className="text-xl font-semibold text-blue-800 mb-4">
-            Guarantors' Information
+            Guarantors Information
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
             <div className="bg-gray-50 p-4 rounded-lg border hover:shadow-md transition">

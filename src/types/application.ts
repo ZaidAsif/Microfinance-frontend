@@ -16,7 +16,7 @@ export type Application = {
   guarantor2Email: string;
   guarantor2Location: string;
   guarantor2Name: string;
-  id: string;
+  _id: string;
   monthlyInstallment: number;
   period: number;
   phone: string;

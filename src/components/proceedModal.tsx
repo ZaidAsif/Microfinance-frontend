@@ -75,7 +75,7 @@ const LoanProceedModal: React.FC<LoanProceedModalProps> = ({
       <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
         <h2 className="text-xl font-semibold text-green-700 text-center mb-4">Enter Your Details</h2>
         <p className="text-gray-600 text-center mb-4">
-          You're applying for a <strong>{loanCategory} - {loanSubcategory}</strong> loan of <strong>PKR {loanAmount}</strong> for {loanPeriod} years.
+          You&apos;re applying for a <strong>{loanCategory} - {loanSubcategory}</strong> loan of <strong>PKR {loanAmount}</strong> for {loanPeriod} years.
         </p>
 
         <input
@@ -124,7 +124,7 @@ const LoanProceedModal: React.FC<LoanProceedModalProps> = ({
                   <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
                   <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
                 </svg>
-                "Processing..."
+                Processing...
               </>
             )
               : ("Submit")}

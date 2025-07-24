@@ -3,9 +3,10 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import dayjs from "dayjs";
 import { BASIC_URL } from "@/constant/constant";
+import { Appointment } from "@/types/appointment";
 
 export default function useApplications() {
-  const [applications, setApplications] = useState([]);
+  const [applications, setApplications] = useState<Appointment[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [month, setMonth] = useState(dayjs());
@@ -21,8 +22,9 @@ export default function useApplications() {
       });
       setApplications(data.data);
       console.log('applications', data.data)
-    } catch (err: any) {
+    } catch (error) {
       setError("Failed to load applications");
+      console.error(error);
     } finally {
       setLoading(false);
     }

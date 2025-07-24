@@ -3,5 +3,5 @@ export type User = {
   name: string;
   email: string;
   cnic: string;
-  phone: string;
+  isAdmin: boolean;
 }
