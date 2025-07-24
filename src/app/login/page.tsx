@@ -33,7 +33,6 @@ export default function Login() {
       localStorage.setItem('user', JSON.stringify(data.data.user));
       router.push(data.data.user.isAdmin ? "/adminPanel" : "/userPortal");
     } catch (error: any) {
-      // Try to extract error message from Axios error response
       const msg =
         error?.response?.data?.msg ||
         error?.response?.data?.message ||

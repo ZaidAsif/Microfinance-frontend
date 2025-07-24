@@ -45,7 +45,6 @@ export default function ChangePassword() {
                     }
                 }
             );
-            console.log("Password change response:", data);
             setFormSuccess("Password changed successfully!");
             setOldPassword("");
             setNewPassword("");

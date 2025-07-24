@@ -22,7 +22,6 @@ export default function LoanCalculator({ categories }: { categories: LoanCategor
     setIsModalOpen(true);
   };
 
-
   const handleCalculate = () => {
     const category = categories.find(cat => cat.name === selectedCategory);
     if (!category || typeof category.maxLoan !== "number") return;
@@ -46,17 +45,18 @@ export default function LoanCalculator({ categories }: { categories: LoanCategor
   };
 
   return (
-    <section className="py-12 bg-gray-100">
-      <h2 className="text-3xl font-semibold text-center text-blue-700 mb-6">Loan Calculator</h2>
-      <div className="max-w-3xl mx-auto p-6 bg-white rounded-lg shadow-md">
+    <section className="py-12 bg-gradient-to-r from-blue-50 to-teal-50">
+
+      {/* Glassmorphism Container */}
+      <div className="max-w-3xl mx-auto p-8 bg-white bg-opacity-60 backdrop-blur-sm rounded-2xl shadow-2xl space-y-6">
 
         {/* Loan Category Dropdown */}
         <div className="mb-4">
-          <label className="block text-lg font-semibold">Select Loan Category:</label>
+          <label className="block text-xl font-semibold text-gray-700">Select Loan Category:</label>
           <select
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
-            className="w-full p-2 border rounded"
+            className="w-full p-3 bg-transparent border-2 border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
           >
             <option value="">-- Select --</option>
             {categories.map((cat, i) => (
@@ -68,11 +68,11 @@ export default function LoanCalculator({ categories }: { categories: LoanCategor
         {/* Loan Subcategory Dropdown */}
         {selectedCategory && (
           <div className="mb-4">
-            <label className="block text-lg font-semibold">Select Subcategory:</label>
+            <label className="block text-xl font-semibold text-gray-700">Select Subcategory:</label>
             <select
               value={selectedSubcategory}
               onChange={(e) => setSelectedSubcategory(e.target.value)}
-              className="w-full p-2 border rounded"
+              className="w-full p-3 bg-transparent border-2 border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
             >
               <option value="">-- Select --</option>
               {categories.find(cat => cat.name === selectedCategory)?.subcategories.map((sub, i) => (
@@ -84,15 +84,15 @@ export default function LoanCalculator({ categories }: { categories: LoanCategor
 
         {/* Loan Amount Input */}
         <div className="mb-4">
-          <label className="block text-lg font-semibold">Enter Loan Amount (PKR):</label>
+          <label className="block text-xl font-semibold text-gray-700">Enter Loan Amount (PKR):</label>
           <input
             type="number"
             value={loanAmount}
             onChange={(e) => setLoanAmount(e.target.value)}
-            className="w-full p-2 border rounded"
+            className="w-full p-3 bg-transparent border-2 border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
           />
           {selectedCategory && (
-            <p className="text-sm text-gray-600 mt-1">
+            <p className="text-sm text-gray-600 mt-2">
               Max loan limit for {selectedCategory}: <strong>PKR {categories.find(cat => cat.name === selectedCategory)?.maxLoan}</strong>
             </p>
           )}
@@ -100,12 +100,12 @@ export default function LoanCalculator({ categories }: { categories: LoanCategor
 
         {/* Deposit Amount */}
         <div className="mb-4">
-          <label className="block text-lg font-semibold">Initial Deposit (PKR):</label>
+          <label className="block text-xl font-semibold text-gray-700">Initial Deposit (PKR):</label>
           <input
             type="number"
             value={deposit}
             onChange={(e) => setDeposit(e.target.value)}
-            className="w-full p-2 border rounded"
+            className="w-full p-3 bg-transparent border-2 border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
           />
         </div>
 
@@ -115,41 +115,40 @@ export default function LoanCalculator({ categories }: { categories: LoanCategor
         {/* Calculate Button */}
         <button
           onClick={handleCalculate}
-          className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700 transition"
+          className="w-full bg-green-600 text-white py-3 rounded-lg shadow-md hover:bg-green-700 transition duration-300 transform hover:scale-105"
         >
           Calculate Loan
         </button>
 
         {/* Loan Breakdown */}
-        {
-        loanDetails && !error && (
-          <>
-          <div className="mt-6 p-4 bg-green-100 rounded">
+        {loanDetails && !error && (
+          <div className="mt-6 p-6 bg-green-100 rounded-xl shadow-lg space-y-4">
+            <p className="text-lg font-semibold">Loan Breakdown</p>
             <p><strong>Total Loan Amount:</strong> PKR {loanDetails.amount}</p>
             <p><strong>Duration:</strong> {loanDetails.period} Years</p>
-            <p><strong>Monthly Installment:</strong> PKR {loanDetails.monthlyInstallment !== undefined ? loanDetails.monthlyInstallment.toFixed(2) : 'N/A'}</p>
+            <p><strong>Monthly Installment:</strong> PKR {loanDetails.monthlyInstallment?.toFixed(2) ?? 'N/A'}</p>
+
+            {/* Proceed Button */}
+            <button
+              onClick={handleProceed}
+              className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition"
+            >
+              Proceed
+            </button>
           </div>
-        <button
-          onClick={handleProceed}
-          className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition">
-          Proceed
-        </button>
-  
+        )}
+
+        {/* Modal */}
         <LoanProceedModal
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
           loanCategory={selectedCategory}
           loanSubcategory={selectedSubcategory}
-          loanAmount={loanDetails.amount}
-          loanPeriod={loanDetails.period}
-          monthlyInstallment={Number((loanDetails.monthlyInstallment ?? 0).toFixed(2))}
+          loanAmount={loanDetails?.amount ?? 0}
+          loanPeriod={loanDetails?.period ?? 0}
+          monthlyInstallment={Number((loanDetails?.monthlyInstallment ?? 0).toFixed(2))}
         />
-        </>
-        )
-
-
- }
-    </div>
-    </section >
+      </div>
+    </section>
   );
 }
