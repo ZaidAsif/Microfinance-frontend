@@ -41,7 +41,7 @@ export default function useApplications() {
   );
 
   const eventsByDate: { [date: string]: any[] } = {};
-  applications.forEach((app: any) => {
+  applications.forEach((app: Appointment) => {
     const date = dayjs(app.createdAt).format("YYYY-MM-DD");
     if (!eventsByDate[date]) eventsByDate[date] = [];
     eventsByDate[date].push(app);

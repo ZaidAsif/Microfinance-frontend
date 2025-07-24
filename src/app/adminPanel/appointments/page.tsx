@@ -10,7 +10,6 @@ import { useRouter } from "next/navigation";
 import useApplications from "@/components/appointmentsData";
 import { useState } from "react";
 import AppDetailModal from "@/components/appDetailModal";
-import { Application } from "@/types/application";
 import { Appointment } from "@/types/appointment";
 
 export default function ApplicationsPage() {

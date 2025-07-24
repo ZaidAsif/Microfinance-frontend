@@ -6,5 +6,6 @@ export type Appointment = {
   time: string; 
   token: string; 
   location: string;
-  slipUrl: string; // URL to the PDF slip
+  slipUrl: string; 
+  createdAt: Date;
 }
