@@ -73,6 +73,7 @@ const LoanProceedModal: React.FC<LoanProceedModalProps> = ({
         onClose();
       }, 3000);
     } catch (err) {
+      console.error("Error submitting loan application:", err);
       setError("Something went wrong. Please try again later.");
       setLoading(false);
     }
