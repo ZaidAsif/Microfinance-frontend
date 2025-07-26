@@ -33,7 +33,7 @@ export default function LandingPage() {
       <section className="text-center py-20 sm:py-28">
         <div className="max-w-4xl mx-auto space-y-6">
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-blue-800 tracking-wide">
-            Empower Your Future with Saylani Microfinance
+            Empower Your Future with Microfinance
           </h1>
           <p className="text-lg sm:text-xl text-gray-600 mb-8 leading-relaxed max-w-3xl mx-auto">
             We provide *interest-free loans* for business, education, home construction, and more to help you build a better future.
