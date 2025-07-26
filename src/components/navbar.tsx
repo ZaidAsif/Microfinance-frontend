@@ -38,7 +38,6 @@ export default function Navbar () {
           minHeight: "56px"
         }}
       >
-        {/* Left: Logo / App Name */}
         <h1
           className="text-lg sm:text-2xl font-bold cursor-pointer text-green-800 drop-shadow truncate max-w-[60vw] sm:max-w-none"
           onClick={() => router.push('/')}
@@ -51,7 +50,6 @@ export default function Navbar () {
            Microfinance
         </h1>
 
-        {/* Right: Conditional Buttons */}
         <div className="flex items-center gap-2 flex-shrink-0">
           {user && (
             <button

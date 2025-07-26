@@ -67,7 +67,6 @@ const LoanProceedModal: React.FC<LoanProceedModalProps> = ({
 
       setSuccessMessage("✅ Loan added in queue. Your account details have been emailed.");
 
-      // Optional: Auto-close modal after delay
       setTimeout(() => {
         setLoading(false);
         onClose();

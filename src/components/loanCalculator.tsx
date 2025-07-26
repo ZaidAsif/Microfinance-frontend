@@ -32,10 +32,8 @@ export default function LoanCalculator({ categories }: { categories: LoanCategor
       return;
     }
 
-    // Clear errors if all good
     setError('');
 
-    // Calculate remaining loan after deposit
     const finalLoanAmount = Number(loanAmount) - Number(deposit);
     setLoanDetails({
       amount: finalLoanAmount,
@@ -82,7 +80,6 @@ export default function LoanCalculator({ categories }: { categories: LoanCategor
           </div>
         )}
 
-        {/* Loan Amount Input */}
         <div className="mb-4">
           <label className="block text-xl font-semibold text-gray-700">Enter Loan Amount (PKR):</label>
           <input
@@ -98,7 +95,6 @@ export default function LoanCalculator({ categories }: { categories: LoanCategor
           )}
         </div>
 
-        {/* Deposit Amount */}
         <div className="mb-4">
           <label className="block text-xl font-semibold text-gray-700">Initial Deposit (PKR):</label>
           <input
@@ -109,10 +105,8 @@ export default function LoanCalculator({ categories }: { categories: LoanCategor
           />
         </div>
 
-        {/* Error Message */}
         {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
 
-        {/* Calculate Button */}
         <button
           onClick={handleCalculate}
           className="w-full bg-green-600 text-white py-3 rounded-lg shadow-md hover:bg-green-700 transition duration-300 transform hover:scale-105"
@@ -120,7 +114,6 @@ export default function LoanCalculator({ categories }: { categories: LoanCategor
           Calculate Loan
         </button>
 
-        {/* Loan Breakdown */}
         {loanDetails && !error && (
           <div className="mt-6 p-6 bg-green-100 rounded-xl shadow-lg space-y-4">
             <p className="text-lg font-semibold">Loan Breakdown</p>
@@ -128,7 +121,6 @@ export default function LoanCalculator({ categories }: { categories: LoanCategor
             <p><strong>Duration:</strong> {loanDetails.period} Years</p>
             <p><strong>Monthly Installment:</strong> PKR {loanDetails.monthlyInstallment?.toFixed(2) ?? 'N/A'}</p>
 
-            {/* Proceed Button */}
             <button
               onClick={handleProceed}
               className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition"

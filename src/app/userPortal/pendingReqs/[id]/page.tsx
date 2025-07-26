@@ -144,7 +144,7 @@ export default function LoanDetails() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 flex flex-col md:flex-row">
-      {/* Custom Mobile Quick Actions */}
+      {/* Mobile bar */}
       <div className="fixed bottom-4 left-0 w-full flex justify-center z-30 md:hidden">
         <div className="bg-white shadow-lg rounded-full px-6 py-3 flex gap-8 border border-gray-200">
           <button

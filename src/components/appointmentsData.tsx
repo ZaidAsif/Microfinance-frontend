@@ -1,4 +1,3 @@
-// components/applicationsData.ts
 import { useEffect, useState } from "react";
 import axios from "axios";
 import dayjs from "dayjs";
