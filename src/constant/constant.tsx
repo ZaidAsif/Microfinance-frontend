@@ -1,4 +1,4 @@
 
-const PROD_URL = 'http://microfinance-backend-2.vercel.app/'
+const PROD_URL = 'https://microfinance-backend-nine.vercel.app/'
 
 export const BASIC_URL = PROD_URL;
